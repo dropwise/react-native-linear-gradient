@@ -18,22 +18,22 @@ const convertPoint = (name, point) => {
 };
 
 type PropsType = {
-  startPoint?: Array<number> | {x: number, y: number};
-  endPoint?: Array<number> | {x: number, y: number};
+  start?: Array<number> | {x: number, y: number};
+  end?: Array<number> | {x: number, y: number};
   colors: Array<string>;
   locations?: Array<number>;
 } & typeof(View);
 
 export default class LinearGradient extends Component {
   static propTypes = {
-    startPoint: PropTypes.oneOfType([
+    start: PropTypes.oneOfType([
       PointPropType,
       deprecatedPropType(
         PropTypes.arrayOf(PropTypes.number),
         'Use point object with {x, y} instead.'
       )
     ]),
-    endPoint: PropTypes.oneOfType([
+    end: PropTypes.oneOfType([
       PointPropType,
       deprecatedPropType(
         PropTypes.arrayOf(PropTypes.number),
@@ -55,9 +55,9 @@ export default class LinearGradient extends Component {
     const {
       children,
       colors,
-      endPoint,
+      end,
       locations,
-      startPoint,
+      start,
       style,
       ...otherProps
     } = this.props;
@@ -89,8 +89,8 @@ export default class LinearGradient extends Component {
         <NativeLinearGradient
           style={{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}
           colors={colors.map(processColor)}
-          startPoint={convertPoint('startPoint', startPoint)}
-          endPoint={convertPoint('endPoint', endPoint)}
+          startPoint={convertPoint('start', start)}
+          endPoint={convertPoint('end', end)}
           locations={locations ? locations.slice(0, colors.length) : null}
           borderRadii={borderRadiiPerCorner}
         />
